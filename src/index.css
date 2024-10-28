@@ -36,7 +36,7 @@
   --fz-h1: 36px;
   --fw-h1: 600;
 
-  --transition: .5s;
+  --transition: .3s;
 }
 
 * {
@@ -50,5 +50,4 @@
 body {
   background-color: var(--background-color);
   margin: 0;
-  display: flex; 
 }

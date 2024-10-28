@@ -1,0 +1,19 @@
+.header {
+  height: 78px;
+  width: 100%;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Header_icon path {
+  stroke: var(--text-color);
+  fill: var(--text-color);
+}
+
+.Header_nav {
+  display: flex;
+  gap: 4px;
+}

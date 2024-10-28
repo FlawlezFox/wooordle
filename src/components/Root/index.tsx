@@ -1,9 +1,9 @@
-import { memo, useCallback, useContext, useEffect, useState } from "react";
-import { ThemeContext } from "./ThemeContext";
+import { memo, useCallback, useEffect, useState } from "react";
 import { Game } from "src/models";
+import Header from "../Header";
+import styles from "./index.module.css";
 
 const Root = () => {
-  const { theme, switchTheme } = useContext(ThemeContext);
   const [guess, setGuess] = useState<string>("");
   const [game, setGame] = useState<Game>();
 
@@ -29,15 +29,8 @@ const Root = () => {
   };
 
   return (
-    <div>
-      <div className="container">Root</div>
-      <button onClick={switchTheme}>{theme}</button>
-      <button onClick={handleStart}>reset</button>
-
-      <div>
-        <input type="text" onChange={handleChange} />
-        <button onClick={handleMakeGuess}>Guess</button>
-      </div>
+    <div className={styles.container}>
+      <Header />
     </div>
   );
 };
