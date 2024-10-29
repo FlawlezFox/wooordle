@@ -23,7 +23,7 @@ const Header = () => {
         )}
       </IconButton>
 
-      <Text variant="large" fontWeight="600">
+      <Text variant="large" fontWeight="600" className={styles.Header_title}>
         Wooordle
       </Text>
 

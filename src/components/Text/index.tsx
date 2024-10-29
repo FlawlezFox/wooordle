@@ -17,7 +17,7 @@ const Text = (props: Props) => {
   const textClassName = classNames(
     styles.text,
     styles[props.variant],
-    styles[props.className || ""]
+    props.className || ""
   );
 
   return (

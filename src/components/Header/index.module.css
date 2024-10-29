@@ -3,14 +3,20 @@
   width: 100%;
   padding: 0 24px;
   border-bottom: 1px solid var(--light-gray);
-  display: flex;
+  display: grid;
   align-items: center;
+  grid-template-columns: min-content min-content;
   justify-content: space-between;
 }
 
 .Header_icon path {
   stroke: var(--text-color);
   fill: var(--text-color);
+}
+
+.Header_title {
+  position: absolute;
+  justify-self: center;
 }
 
 .Header_nav {

@@ -1,0 +1,17 @@
+.tile {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--light-gray);
+  border-radius: var(--border-radius);
+}
+
+.letterInRightIndex {
+  background-color: var(--green);
+}
+
+.letterInWord {
+  background-color: var(--yellow);
+}
