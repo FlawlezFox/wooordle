@@ -4,17 +4,23 @@ import { Solution } from "./Solution";
 type GameMode = "classic" | "custom";
 
 export class Game {
+  readonly DEFAULT_WORD_LENGTH = 5;
+  readonly DEFAULT_GAME_MODE: GameMode = "classic";
+  readonly DEFAULT_MAX_ATT = 6;
+
   solution?: Solution;
   gameMode: GameMode;
   attempts?: number;
   maxAttempts: number;
   guesses?: Guess[];
 
-  constructor(wordLength: number, gameMode: GameMode, maxAttempts: number) {
-    this.solution = new Solution(wordLength);
-    this.gameMode = gameMode;
+  constructor(wordLength?: number, gameMode?: GameMode, maxAttempts?: number) {
+    this.solution = wordLength
+      ? new Solution(wordLength)
+      : new Solution(this.DEFAULT_WORD_LENGTH);
+    this.gameMode = gameMode ?? this.DEFAULT_GAME_MODE;
     this.attempts = 0;
-    this.maxAttempts = maxAttempts;
+    this.maxAttempts = maxAttempts ?? this.DEFAULT_MAX_ATT;
     this.guesses = [];
   }
 
