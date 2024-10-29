@@ -26,20 +26,19 @@ export class Game {
 
   isRightGuess(guess: string) {
     if (!this.solution) {
-      this.guesses?.push({
-        word: guess,
-        isCorrect: false,
-        message: "Solution word was not generated",
-      });
+      return false;
+    }
 
+    if (this.attempts === this.maxAttempts) {
+      console.log("No more attempts!");
       return false;
     }
 
     if (!this.solution.isInDictionary(guess)) {
-      console.log(guess);
       this.guesses?.push({
         word: guess,
         isCorrect: false,
+        isNotInWordList: true,
         message: "Your guess is not in the word list",
       });
 
@@ -78,6 +77,8 @@ export class Game {
           }
         }
 
+        this.addAttempt();
+
         this.guesses?.push({
           word: guess,
           isCorrect: false,
@@ -88,13 +89,35 @@ export class Game {
         return false;
       }
 
+      this.addAttempt();
+
+      const chars: Char[] = [];
+
+      for (let i = 0; i < this.solution.word.length; i++) {
+        chars.push({ char: guess[i], isInRightIndex: true, isInWord: true });
+      }
+
       this.guesses?.push({
         word: guess,
+        chars,
         isCorrect: true,
         message: "You guessed the word",
       });
 
       return true;
+    }
+  }
+
+  addAttempt() {
+    if (this.attempts === undefined) return;
+
+    if (this.attempts < this.maxAttempts) {
+      this.attempts++;
+    }
+
+    if (this.attempts === this.maxAttempts) {
+      // TODO: set endgame flag
+      console.log("Game ended. You have no more attempts");
     }
   }
 }

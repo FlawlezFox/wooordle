@@ -12,7 +12,7 @@ export class Solution {
   }
 
   isInDictionary(guess: string) {
-    if (words.find((w) => w.word === guess)) {
+    if (words.find((w) => w.word === guess.toLowerCase())) {
       return true;
     }
 

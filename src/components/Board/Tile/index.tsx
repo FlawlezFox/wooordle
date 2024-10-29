@@ -12,8 +12,8 @@ type Props = {
 const Tile = (props: Props) => {
   const tileClassName = classNames(
     styles.tile,
-    props.isInWord && styles.letterInWord,
-    props.isInRightIndex && styles.letterInRightIndex
+    props.isInWord && ! props.isInRightIndex && styles.letterInWord,
+    props.isInRightIndex &&  styles.letterInRightIndex
   );
 
   return (
