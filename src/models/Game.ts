@@ -13,6 +13,7 @@ export class Game {
   attempts?: number;
   maxAttempts: number;
   guesses?: Guess[];
+  isGameEnded?: boolean;
 
   constructor(wordLength?: number, gameMode?: GameMode, maxAttempts?: number) {
     this.solution = wordLength
@@ -22,6 +23,7 @@ export class Game {
     this.attempts = 0;
     this.maxAttempts = maxAttempts ?? this.DEFAULT_MAX_ATT;
     this.guesses = [];
+    this.isGameEnded = false;
   }
 
   isRightGuess(guess: string) {
@@ -29,7 +31,7 @@ export class Game {
       return false;
     }
 
-    if (this.attempts === this.maxAttempts) {
+    if (this.isGameEnded) {
       console.log("No more attempts!");
       return false;
     }
@@ -104,6 +106,8 @@ export class Game {
         message: "You guessed the word",
       });
 
+      this.isGameEnded = true;
+
       return true;
     }
   }
@@ -116,8 +120,7 @@ export class Game {
     }
 
     if (this.attempts === this.maxAttempts) {
-      // TODO: set endgame flag
-      console.log("Game ended. You have no more attempts");
+      this.isGameEnded = true;
     }
   }
 }

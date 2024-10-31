@@ -15,7 +15,6 @@ const Row = (props: Props) => {
   const chars = useAtomValue(charsAtom);
   const guesses = useAtomValue(guessesAtom);
   const game = useAtomValue(gameAtom);
-  // TODO: take the word length from the gameAtom
   const [submittedWord, setSubmittedWord] = useState<Char[]>();
 
   useEffect(() => {
