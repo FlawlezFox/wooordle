@@ -25,9 +25,7 @@ const Row = (props: Props) => {
 
     setSubmittedWord([...(guessedChars ?? [])]);
   }, [guesses]);
-
-  useEffect(() => console.log(submittedWord), [submittedWord]);
-
+  
   return (
     <div className={styles.row}>
       {[...Array(game.solution?.length)].map((_v, i) => (

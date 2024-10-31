@@ -1,0 +1,45 @@
+.Key_button {
+  width: 48px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light-gray);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: var(--fz-medium);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &.big {
+    width: 76px;
+    font-size: var(--fz-default);
+  }
+
+  &:hover {
+    filter: brightness(80%);
+  }
+
+  &:active {
+    filter: brightness(60%);
+  }
+
+  &.letterInRightIndex,
+  &.letterInWord,
+  &.letterNotInWord {
+    color: var(--white);
+  }
+
+  &.letterInRightIndex {
+    background-color: var(--green);
+  }
+
+  &.letterNotInWord {
+    background-color: var(--gray);
+  }
+
+  &.letterInWord {
+    background-color: var(--yellow);
+  }
+}

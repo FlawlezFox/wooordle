@@ -3,6 +3,7 @@ import Header from "../Header";
 import styles from "./index.module.css";
 import Board from "../Board";
 import { GameProvider } from "./GameContext";
+import Keyboard from "../Keyboard";
 
 const Root = () => {
   return (
@@ -10,6 +11,7 @@ const Root = () => {
       <Header />
       <GameProvider>
         <Board />
+        <Keyboard />
       </GameProvider>
     </div>
   );

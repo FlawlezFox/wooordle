@@ -60,9 +60,9 @@ const Board = () => {
 
   useEffect(() => console.log(game.solution?.word, game.attempts), [game]);
 
-  useEffect(() => console.log(chars), [chars, game]);
+  // useEffect(() => console.log(chars), [chars, game]);
 
-  useEffect(() => console.log(guesses), [guesses]);
+  // useEffect(() => console.log(guesses), [guesses]);
 
   useWindowEventListener("keydown", handleKeyDown);
 

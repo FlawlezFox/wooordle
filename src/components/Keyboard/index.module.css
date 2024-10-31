@@ -1,0 +1,15 @@
+.Keyboard_container {
+  margin-top: 36px;
+  width: 552px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  gap: 8px;
+}
+
+.Keyboard_row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
