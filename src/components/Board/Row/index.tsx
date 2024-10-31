@@ -49,6 +49,7 @@ const Row = (props: Props) => {
               ? chars[i]?.isInWord
               : submittedWord && submittedWord[i]?.isInWord
           }
+          isSubmitted={!!(submittedWord && submittedWord[i]?.char)}
         />
       ))}
     </div>

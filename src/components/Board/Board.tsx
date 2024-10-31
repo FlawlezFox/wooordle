@@ -10,32 +10,32 @@ const Board = () => {
   const [chars, setChars] = useAtom(charsAtom);
   const [guesses, setGuesses] = useAtom(guessesAtom);
   const [game, setGame] = useAtom(gameAtom);
-  const indexRef = useRef(0);
+  const keyIndexRef = useRef(0);
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       const exp = /^[a-zA-Z]$/;
       const key = event.key;
 
-      if (exp.test(key) && indexRef.current < 5) {
-        indexRef.current++;
+      if (exp.test(key) && keyIndexRef.current < 5) {
+        keyIndexRef.current++;
 
         setChars((prev) => [
           ...prev,
           { char: key, isInRightIndex: false, isInWord: false },
         ]);
-      } else if (key.includes("Backspace") && indexRef.current > 0) {
-        indexRef.current--;
+      } else if (key.includes("Backspace") && keyIndexRef.current > 0) {
+        keyIndexRef.current--;
 
-        setChars((prev) => prev.filter((_c, i) => i !== indexRef.current));
-      } else if (key.includes("Enter") && indexRef.current === 5) {
+        setChars((prev) => prev.filter((_c, i) => i !== keyIndexRef.current));
+      } else if (key.includes("Enter") && keyIndexRef.current === 5) {
         const word = chars.map((c) => c.char).join("");
 
         game.isRightGuess(word);
         setGuesses([...(game.guesses ?? [])]);
 
         setChars([]);
-        indexRef.current = 0;
+        keyIndexRef.current = 0;
       }
     },
     [chars, game, setChars, setGuesses]

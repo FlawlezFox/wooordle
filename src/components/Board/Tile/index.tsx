@@ -7,13 +7,15 @@ type Props = {
   char?: string;
   isInWord?: boolean;
   isInRightIndex?: boolean;
+  isSubmitted?: boolean;
 };
 
 const Tile = (props: Props) => {
   const tileClassName = classNames(
     styles.tile,
-    props.isInWord && ! props.isInRightIndex && styles.letterInWord,
-    props.isInRightIndex &&  styles.letterInRightIndex
+    props.isInWord && !props.isInRightIndex && styles.letterInWord,
+    props.isInRightIndex && styles.letterInRightIndex,
+    props.isInWord === false && props.isSubmitted && styles.letterNotInWord
   );
 
   return (

@@ -8,8 +8,18 @@
   border-radius: var(--border-radius);
 }
 
+.letterInRightIndex p,
+.letterInWord p,
+.letterNotInWord p {
+  color: var(--white);
+}
+
 .letterInRightIndex {
   background-color: var(--green);
+}
+
+.letterNotInWord {
+  background-color: var(--gray);
 }
 
 .letterInWord {
