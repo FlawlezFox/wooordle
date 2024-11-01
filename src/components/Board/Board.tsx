@@ -5,9 +5,12 @@ import { useWindowEventListener } from "src/hooks";
 import { GameContext } from "../Root";
 import { useAtom } from "jotai";
 import { Guess } from "src/models";
+import { StatsDialogContext } from "../StatsDialog";
 
 const Board = () => {
   const { charsAtom, guessesAtom, gameAtom } = useContext(GameContext);
+  const { showStatsDialog } = useContext(StatsDialogContext);
+
   const [chars, setChars] = useAtom(charsAtom);
   const [guesses, setGuesses] = useAtom(guessesAtom);
   const [game, setGame] = useAtom(gameAtom);
@@ -45,10 +48,10 @@ const Board = () => {
         }
 
         if (lastGuess && lastGuess.isCorrect) {
-          // TODO: make custom alert windows
-          alert("You guessed the word");
+          showStatsDialog({ gameResult: "win" });
         } else if (game.isGameEnded) {
-          alert("You have no more attempts!")
+          // TODO: not showing after the lose
+          showStatsDialog({ gameResult: "lose" });
         }
 
         setChars([]);

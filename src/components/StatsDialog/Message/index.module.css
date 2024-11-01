@@ -30,3 +30,7 @@
 .Message_redBlur {
   background-color: var(--red);
 }
+
+.Message_span {
+  font-weight: var(--fw-medium);
+}

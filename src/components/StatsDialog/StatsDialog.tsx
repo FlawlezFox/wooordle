@@ -3,9 +3,12 @@ import Dialog from "../Dialog";
 import { StatsDialogContext } from "./Context";
 import { Button } from "../Button";
 import { Message } from "./Message";
+import { useAtomValue } from "jotai";
 
 const StatsDialog = memo(() => {
-  const { dialogRef } = useContext(StatsDialogContext);
+  const { dialogRef, gameResultAtom } = useContext(StatsDialogContext);
+
+  const gameResult = useAtomValue(gameResultAtom);
 
   const handleShare = useCallback(() => {}, []);
 
@@ -39,7 +42,7 @@ const StatsDialog = memo(() => {
       }
       onCloseDialog={handleClose}
     >
-      <Message isWin solution="Clash"/>
+      {gameResult && <Message isWin={gameResult === "win"} solution="Clash" />}
     </Dialog>
   );
 });

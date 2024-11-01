@@ -29,7 +29,7 @@ const Key = (props: Props) => {
 
     if (submittedChar && submittedChar.isInRightIndex) return;
 
-    if (submittedChar && !submittedChar.isInRightIndex && submittedChar.isInWord) return;
+    if (submittedChar && !submittedChar.isInRightIndex && !guessedChar?.isInRightIndex && submittedChar.isInWord ) return;
 
     setSubmittedChar(guessedChar);
   }, [guesses]);

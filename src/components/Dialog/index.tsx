@@ -11,7 +11,7 @@ import IconButton from "../IconButton";
 import CloseIcon from "src/assets/close.svg?react";
 
 interface Props extends DialogHTMLAttributes<HTMLDialogElement> {
-  children: React.ReactElement | React.ReactElement[];
+  children: React.ReactNode;
   title: string;
   actions?: React.ReactElement;
   onCloseDialog?: () => void;

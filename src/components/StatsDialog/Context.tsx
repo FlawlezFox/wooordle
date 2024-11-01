@@ -1,8 +1,27 @@
-import { createContext, memo, useCallback, useMemo, useRef } from "react";
+import { atom, PrimitiveAtom, useSetAtom } from "jotai";
+import {
+  createContext,
+  memo,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
-type ShowDialog = () => void;
+type GameResult = "win" | "lose" | null | undefined;
+type ShowDialog = (p: { gameResult?: GameResult }) => void;
 
-type ContextType = {
+type ContextAtoms = {
+  gameResultAtom: PrimitiveAtom<GameResult>;
+};
+
+const initAtoms = (): ContextAtoms => {
+  return {
+    gameResultAtom: atom<GameResult>(),
+  };
+};
+
+type ContextType = ContextAtoms & {
   dialogRef: React.RefObject<HTMLDialogElement>;
   showStatsDialog: ShowDialog;
 };
@@ -14,20 +33,31 @@ type Props = {
 };
 
 const Provider = memo(({ children }: Props) => {
+  const [atoms] = useState(() => initAtoms());
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  const showStatsDialog = useCallback<ShowDialog>(() => {
-    if (dialogRef.current) {
-      dialogRef.current.showModal();
-    }
-  }, []);
+  const setGameResult = useSetAtom(atoms.gameResultAtom);
+
+  const showStatsDialog = useCallback<ShowDialog>(
+    (p: { gameResult?: GameResult }) => {
+      if (dialogRef.current) {
+        dialogRef.current.showModal();
+      }
+
+      if (p.gameResult) {
+        setGameResult(p.gameResult);
+      }
+    },
+    [setGameResult]
+  );
 
   const context = useMemo(() => {
     return {
+      ...atoms,
       dialogRef,
       showStatsDialog,
     };
-  }, [showStatsDialog]);
+  }, [atoms, showStatsDialog]);
 
   return <Context.Provider value={context}>{children}</Context.Provider>;
 });
