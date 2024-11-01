@@ -1,2 +1,4 @@
 export * from "./Root";
-export * from "./Text"
+export { default } from "./Root";
+export * from "./Text";
+export * from "./StatsDialog";

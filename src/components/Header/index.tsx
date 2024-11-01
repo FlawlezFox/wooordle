@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import IconButton from "../IconButton";
 import styles from "./index.module.css";
 import SunIcon from "src/assets/sun.svg?react";
@@ -9,9 +9,15 @@ import SettingsIcon from "src/assets/settings.svg?react";
 import GithubIcon from "src/assets/github.svg?react";
 import { ThemeContext } from "../Root/ThemeContext";
 import Text from "../Text";
+import { StatsDialogContext } from "../StatsDialog";
 
 const Header = () => {
   const { theme, switchTheme } = useContext(ThemeContext);
+  const { showStatsDialog } = useContext(StatsDialogContext);
+
+  const handleShowStatsDialog = useCallback(() => {
+    showStatsDialog();
+  }, [showStatsDialog]);
 
   return (
     <header className={styles.header}>
@@ -32,7 +38,7 @@ const Header = () => {
           <QuestionMarkIcon className={styles.Header_icon} />
         </IconButton>
 
-        <IconButton>
+        <IconButton onClick={handleShowStatsDialog}>
           <ChartIcon className={styles.Header_icon} />
         </IconButton>
 
