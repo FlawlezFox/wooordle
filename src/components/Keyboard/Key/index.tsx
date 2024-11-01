@@ -29,6 +29,8 @@ const Key = (props: Props) => {
 
     if (submittedChar && submittedChar.isInRightIndex) return;
 
+    if (submittedChar && !submittedChar.isInRightIndex && submittedChar.isInWord) return;
+
     setSubmittedChar(guessedChar);
   }, [guesses]);
 
