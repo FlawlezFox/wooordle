@@ -1,6 +1,7 @@
 import { memo, useCallback, useContext } from "react";
 import Dialog from "../Dialog";
 import { StatsDialogContext } from "./Context";
+import { Button } from "../Button";
 
 const StatsDialog = memo(() => {
   const { dialogRef } = useContext(StatsDialogContext);
@@ -20,10 +21,19 @@ const StatsDialog = memo(() => {
       ref={dialogRef}
       title="Your statistics"
       actions={
-        <div>
-          <button onClick={handleShare}>share</button>
-          <button onClick={handleReset}>reset</button>
-        </div>
+        <>
+          <Button
+            fullWidth
+            variant="default"
+            color="green"
+            onClick={handleShare}
+          >
+            share
+          </Button>
+          <Button fullWidth variant="outlined" onClick={handleReset}>
+            reset
+          </Button>
+        </>
       }
       onCloseDialog={handleClose}
     >

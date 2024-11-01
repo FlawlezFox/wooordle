@@ -15,6 +15,10 @@
     background-color: var(--text-color);
     filter: opacity(30%);
   }
+
+  &[open] {
+    animation: open var(--transition) ease-in forwards;
+  }
 }
 
 .Dialog_closeIcon path {
@@ -36,4 +40,14 @@
 .Dialog_actions {
   margin-top: 36px;
   display: flex;
+  gap: 24px;
+}
+
+@keyframes open {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
