@@ -7,7 +7,7 @@ type TextVariant = "default" | "medium" | "large";
 type FontWeight = "400" | "500" | "600" | "700";
 
 type Props = {
-  children: string;
+  children: React.ReactNode;
   variant: TextVariant;
   fontWeight?: FontWeight;
   className?: string;

@@ -2,6 +2,7 @@ import { memo, useCallback, useContext } from "react";
 import Dialog from "../Dialog";
 import { StatsDialogContext } from "./Context";
 import { Button } from "../Button";
+import { Message } from "./Message";
 
 const StatsDialog = memo(() => {
   const { dialogRef } = useContext(StatsDialogContext);
@@ -28,16 +29,17 @@ const StatsDialog = memo(() => {
             color="green"
             onClick={handleShare}
           >
-            share
+            Share
           </Button>
+
           <Button fullWidth variant="outlined" onClick={handleReset}>
-            reset
+            Reset
           </Button>
         </>
       }
       onCloseDialog={handleClose}
     >
-      <div>Some content here</div>
+      <Message isWin solution="Clash"/>
     </Dialog>
   );
 });
