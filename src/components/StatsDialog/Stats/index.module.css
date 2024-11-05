@@ -1,0 +1,21 @@
+.Stats {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.Stats_li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Stats_title,
+.Stats_number {
+  font-size: var(--fz-medium);
+}
+
+.Stats_number {
+  font-weight: var(--fw-medium);
+}

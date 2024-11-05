@@ -1,4 +1,5 @@
 import { atom, PrimitiveAtom, useSetAtom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 import {
   createContext,
   memo,
@@ -8,6 +9,13 @@ import {
   useState,
 } from "react";
 
+export type GameStats = {
+  gamesPlayed: number;
+  gamesWon: number;
+  winPercent: number;
+  streakCurrent: number;
+  streakMax: number;
+};
 type GameResult = "win" | "lose" | null | undefined;
 type ShowDialog = (p: { gameResult?: GameResult }) => void;
 
@@ -21,9 +29,18 @@ const initAtoms = (): ContextAtoms => {
   };
 };
 
+const gameStatsAtom = atomWithStorage<GameStats>("gameStats", {
+  gamesPlayed: 0,
+  gamesWon: 0,
+  winPercent: 0,
+  streakCurrent: 0,
+  streakMax: 0,
+});
+
 type ContextType = ContextAtoms & {
   dialogRef: React.RefObject<HTMLDialogElement>;
   showStatsDialog: ShowDialog;
+  gameStatsAtom: typeof gameStatsAtom;
 };
 
 const Context = createContext<ContextType>(undefined as unknown as ContextType);
@@ -37,18 +54,68 @@ const Provider = memo(({ children }: Props) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   const setGameResult = useSetAtom(atoms.gameResultAtom);
+  const setGameStats = useSetAtom(gameStatsAtom);
+
+  const updateGameStats = useCallback(
+    (gameResult: GameResult) => {
+      if (gameResult) {
+        setGameStats((prev) => ({
+          ...prev,
+          gamesPlayed: ++prev.gamesPlayed,
+        }));
+      }
+
+      if (gameResult === "win") {
+        setGameStats((prev) => {
+          if (prev.streakCurrent >= prev.streakMax) {
+            return {
+              ...prev,
+              gamesWon: ++prev.gamesWon,
+              winPercent: Math.round((prev.gamesWon / prev.gamesPlayed) * 100),
+              streakCurrent: ++prev.streakCurrent,
+              streakMax: prev.streakCurrent,
+            };
+          }
+
+          if (prev.streakCurrent < prev.streakMax) {
+            return {
+              ...prev,
+              gamesWon: ++prev.gamesWon,
+              winPercent: Math.round((prev.gamesWon / prev.gamesPlayed) * 100),
+              streakCurrent: ++prev.streakCurrent,
+            };
+          }
+
+          return {
+            ...prev,
+            gamesWon: ++prev.gamesWon,
+            winPercent: Math.round((prev.gamesWon / prev.gamesPlayed) * 100),
+          };
+        });
+      } else {
+        setGameStats((prev) => ({
+          ...prev,
+          winPercent: Math.round((prev.gamesWon / prev.gamesPlayed) * 100),
+          streakCurrent: 0,
+        }));
+      }
+    },
+    [setGameStats]
+  );
 
   const showStatsDialog = useCallback<ShowDialog>(
     (p: { gameResult?: GameResult }) => {
       if (dialogRef.current) {
         dialogRef.current.showModal();
+
+        updateGameStats(p?.gameResult);
       }
 
       if (p?.gameResult) {
         setGameResult(p.gameResult);
       }
     },
-    [setGameResult]
+    [setGameResult, updateGameStats]
   );
 
   const context = useMemo(() => {
@@ -56,6 +123,7 @@ const Provider = memo(({ children }: Props) => {
       ...atoms,
       dialogRef,
       showStatsDialog,
+      gameStatsAtom,
     };
   }, [atoms, showStatsDialog]);
 

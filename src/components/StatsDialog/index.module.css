@@ -1,0 +1,5 @@
+.StatsDialog_hr {
+  border: 1px solid var(--light-gray);
+  margin-top: 36px;
+  margin-bottom: 8px;
+}
