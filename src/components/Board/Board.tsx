@@ -18,6 +18,7 @@ const Board = () => {
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
+      event.preventDefault();
       const exp = /^[a-zA-Z]$/;
       const key = event.key;
 
@@ -39,7 +40,7 @@ const Board = () => {
 
         const isRightGuess = game.isRightGuess(word);
         setGuesses([...(game.guesses ?? [])]);
-        const lastGuess: Guess = game.guesses?.at(-1);
+        const lastGuess: Guess | undefined = game.guesses?.at(-1);
 
         if (!isRightGuess && lastGuess && lastGuess.isNotInWordList) {
           // TODO: make custom alert windows
@@ -50,7 +51,7 @@ const Board = () => {
         if (lastGuess && lastGuess.isCorrect) {
           showStatsDialog({ gameResult: "win" });
         } else if (game.isGameEnded) {
-          // TODO: not showing after the lose
+          console.log("dsdsdsd")
           showStatsDialog({ gameResult: "lose" });
         }
 
@@ -58,7 +59,7 @@ const Board = () => {
         keyIndexRef.current = 0;
       }
     },
-    [chars, game, setChars, setGuesses]
+    [chars, game, setChars, setGuesses, showStatsDialog]
   );
 
   useEffect(() => console.log(game.solution?.word, game.attempts), [game]);

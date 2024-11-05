@@ -44,7 +44,7 @@ const Provider = memo(({ children }: Props) => {
         dialogRef.current.showModal();
       }
 
-      if (p.gameResult) {
+      if (p?.gameResult) {
         setGameResult(p.gameResult);
       }
     },

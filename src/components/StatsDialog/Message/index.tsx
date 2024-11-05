@@ -23,7 +23,7 @@ const Message = memo((props: Props) => {
         {props.isWin ? "You guessed the word!" : "You lose!"}
       </Text>
 
-      {props.solution && (
+      {!!props.solution && (
         <Text variant="default">
           The word was <span className={styles.Message_span}>{props.solution.toUpperCase()}</span>
         </Text>

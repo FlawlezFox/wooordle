@@ -4,14 +4,16 @@ import styles from "./index.module.css";
 import Board from "../Board";
 import { GameProvider } from "./GameContext";
 import Keyboard from "../Keyboard";
+import { StatsDialog } from "../StatsDialog";
 
 const Root = () => {
   return (
     <div className={styles.container}>
-      <Header />
       <GameProvider>
+        <Header />
         <Board />
         <Keyboard />
+        <StatsDialog />
       </GameProvider>
     </div>
   );

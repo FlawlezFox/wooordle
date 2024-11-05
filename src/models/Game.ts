@@ -1,4 +1,4 @@
-import Guess, { Char } from "./Guess";
+import { Guess, Char } from "./Guess";
 import { Solution } from "./Solution";
 
 type GameMode = "classic" | "custom";
