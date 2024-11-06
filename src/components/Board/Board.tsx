@@ -16,6 +16,8 @@ const Board = () => {
   const [game, setGame] = useAtom(gameAtom);
   const keyIndexRef = useRef(0);
 
+  const alertRef = useRef<HTMLDialogElement>(null);
+
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       event.preventDefault();
@@ -43,8 +45,11 @@ const Board = () => {
         const lastGuess: Guess | undefined = game.guesses?.at(-1);
 
         if (!isRightGuess && lastGuess && lastGuess.isNotInWordList) {
-          // TODO: make custom alert windows
-          alert("The word is not in the word list");
+          if (alertRef.current && !alertRef.current.open) {
+            alertRef.current.show();
+            setTimeout(() => alertRef.current!.close(), 2000);
+          }
+
           return;
         }
 
@@ -66,11 +71,17 @@ const Board = () => {
   useWindowEventListener("keydown", handleKeyDown);
 
   return (
-    <div className={styles.board}>
-      {[...Array(game.maxAttempts)].map((_v, i) => (
-        <Row key={i} isCurrent={i === game.attempts} index={i} />
-      ))}
-    </div>
+    <>
+      <dialog ref={alertRef} className={styles.alert}>
+        The word is not in the word list
+      </dialog>
+
+      <div className={styles.board}>
+        {[...Array(game.maxAttempts)].map((_v, i) => (
+          <Row key={i} isCurrent={i === game.attempts} index={i} />
+        ))}
+      </div>
+    </>
   );
 };
 

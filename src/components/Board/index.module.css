@@ -6,3 +6,21 @@
 
   margin-top: 36px;
 }
+
+.alert {
+  padding: 16px;
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--red);
+  border-radius: var(--border-radius);
+  position: absolute;
+  top: 56px;
+  left: 50%;
+  transform: translate(-50%);
+
+  color: var(--red);
+  font-size: var(--fz-default);
+
+  &:focus {
+    outline: none;
+  }
+}
