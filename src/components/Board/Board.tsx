@@ -66,8 +66,6 @@ export const Board = () => {
     [chars, game, setChars, setGuesses, showStatsDialog]
   );
 
-  useEffect(() => console.log(game.solution?.word, game.attempts), [game]);
-
   useWindowEventListener("keydown", handleKeyDown);
 
   return (
