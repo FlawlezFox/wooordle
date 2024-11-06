@@ -9,15 +9,18 @@ type Props = {
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = memo((props: Props) => {
+  const { className, variant, color, fullWidth, ...buttonProps } = props;
+
   const buttonClassName = classNames(
     styles.Button,
-    props.className,
-    styles[props.variant],
-    styles[props.color ?? ""],
-    props.fullWidth && styles.fullWidth
+    className,
+    styles[variant],
+    styles[color ?? ""],
+    fullWidth && styles.fullWidth
   );
+
   return (
-    <button className={buttonClassName} {...props}>
+    <button className={buttonClassName} {...buttonProps}>
       {props.children}
     </button>
   );

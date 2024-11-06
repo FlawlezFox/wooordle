@@ -51,7 +51,6 @@ const Board = () => {
         if (lastGuess && lastGuess.isCorrect) {
           showStatsDialog({ gameResult: "win" });
         } else if (game.isGameEnded) {
-          console.log("dsdsdsd")
           showStatsDialog({ gameResult: "lose" });
         }
 
@@ -63,10 +62,6 @@ const Board = () => {
   );
 
   useEffect(() => console.log(game.solution?.word, game.attempts), [game]);
-
-  // useEffect(() => console.log(chars), [chars, game]);
-
-  // useEffect(() => console.log(guesses), [guesses]);
 
   useWindowEventListener("keydown", handleKeyDown);
 

@@ -71,7 +71,8 @@ const Provider = memo(({ children }: Props) => {
             return {
               ...prev,
               gamesWon: ++prev.gamesWon,
-              winPercent: Math.round((prev.gamesWon / prev.gamesPlayed) * 100),
+              winPercent:
+                Math.round((prev.gamesWon / prev.gamesPlayed) * 100) ?? 0,
               streakCurrent: ++prev.streakCurrent,
               streakMax: prev.streakCurrent,
             };
@@ -81,7 +82,8 @@ const Provider = memo(({ children }: Props) => {
             return {
               ...prev,
               gamesWon: ++prev.gamesWon,
-              winPercent: Math.round((prev.gamesWon / prev.gamesPlayed) * 100),
+              winPercent:
+                Math.round((prev.gamesWon / prev.gamesPlayed) * 100) ?? 0,
               streakCurrent: ++prev.streakCurrent,
             };
           }
@@ -89,13 +91,14 @@ const Provider = memo(({ children }: Props) => {
           return {
             ...prev,
             gamesWon: ++prev.gamesWon,
-            winPercent: Math.round((prev.gamesWon / prev.gamesPlayed) * 100),
+            winPercent:
+              Math.round((prev.gamesWon / prev.gamesPlayed) * 100) ?? 0,
           };
         });
-      } else {
+      } else if (gameResult === "lose") {
         setGameStats((prev) => ({
           ...prev,
-          winPercent: Math.round((prev.gamesWon / prev.gamesPlayed) * 100),
+          winPercent: Math.round((prev.gamesWon / prev.gamesPlayed) * 100) ?? 0,
           streakCurrent: 0,
         }));
       }

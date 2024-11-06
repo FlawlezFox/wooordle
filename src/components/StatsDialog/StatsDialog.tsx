@@ -1,12 +1,13 @@
-import { memo, useCallback, useContext } from "react";
+import { memo, useCallback, useContext, useState } from "react";
 import Dialog from "../Dialog";
 import { StatsDialogContext } from "./Context";
 import { Button } from "../Button";
 import { Message } from "./Message";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { GameContext } from "../Root";
 import Stats from "./Stats";
 import styles from "./index.module.css";
+import { RESET } from "jotai/utils";
 
 const StatsDialog = memo(() => {
   const { gameStatsAtom, dialogRef, gameResultAtom } =
@@ -14,12 +15,28 @@ const StatsDialog = memo(() => {
   const { gameAtom } = useContext(GameContext);
 
   const gameResult = useAtomValue(gameResultAtom);
-  const gameStats = useAtomValue(gameStatsAtom);
   const game = useAtomValue(gameAtom);
+  const [gameStats, setGameStats] = useAtom(gameStatsAtom);
+  const [isCopied, setIsCopied] = useState(false);
 
-  const handleShare = useCallback(() => {}, []);
+  const handleShare = useCallback(() => {
+    if (!navigator.clipboard) return;
 
-  const handleReset = useCallback(() => {}, []);
+    if (!isCopied) {
+      navigator.clipboard.writeText(`Games played: ${gameStats.gamesPlayed}
+        Games won: ${gameStats.gamesWon}
+        Win%: ${isNaN(gameStats.winPercent) ? 0 : gameStats.winPercent}%
+        Current streak: ${gameStats.streakCurrent}
+        Max streak: ${gameStats.streakMax}`);
+
+      setIsCopied((prev) => !prev);
+      setTimeout(() => setIsCopied((prev) => !prev), 5000);
+    }
+  }, [gameStats, isCopied]);
+
+  const handleReset = useCallback(() => {
+    setGameStats(RESET);
+  }, [setGameStats]);
 
   const handleClose = useCallback(() => {
     if (dialogRef.current) {
@@ -39,7 +56,7 @@ const StatsDialog = memo(() => {
             color="green"
             onClick={handleShare}
           >
-            Share
+            {isCopied ? "Copied!" : "Share"}
           </Button>
 
           <Button fullWidth variant="outlined" onClick={handleReset}>
@@ -58,7 +75,7 @@ const StatsDialog = memo(() => {
 
       {gameResult && <hr className={styles.StatsDialog_hr} />}
 
-      <Stats stats={gameStats} />
+      <Stats />
     </Dialog>
   );
 });

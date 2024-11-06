@@ -1,36 +1,39 @@
-import { GameStats } from "../Context";
+import { useContext } from "react";
+import { StatsDialogContext } from "../Context";
 import styles from "./index.module.css";
+import { useAtomValue } from "jotai";
 
-type Props = {
-  stats: GameStats;
-};
+const Stats = () => {
+  const { gameStatsAtom } = useContext(StatsDialogContext);
+  const gameStats = useAtomValue(gameStatsAtom);
 
-const Stats = (props: Props) => {
   return (
     <ul className={styles.Stats}>
       <li className={styles.Stats_li}>
         <span className={styles.Stats_title}>🎮 Games played</span>
-        <span className={styles.Stats_number}>{props.stats.gamesPlayed}</span>
+        <span className={styles.Stats_number}>{gameStats.gamesPlayed}</span>
       </li>
 
       <li className={styles.Stats_li}>
         <span className={styles.Stats_title}>🏆 Games won</span>
-        <span className={styles.Stats_number}>{props.stats.gamesWon}</span>
+        <span className={styles.Stats_number}>{gameStats.gamesWon}</span>
       </li>
 
       <li className={styles.Stats_li}>
         <span className={styles.Stats_title}>📈 Win %</span>
-        <span className={styles.Stats_number}>{props.stats.winPercent}</span>
+        <span className={styles.Stats_number}>
+          {isNaN(gameStats.winPercent) ? 0 : gameStats.winPercent}
+        </span>
       </li>
 
       <li className={styles.Stats_li}>
         <span className={styles.Stats_title}>🚀 Current streak</span>
-        <span className={styles.Stats_number}>{props.stats.streakCurrent}</span>
+        <span className={styles.Stats_number}>{gameStats.streakCurrent}</span>
       </li>
 
       <li className={styles.Stats_li}>
         <span className={styles.Stats_title}>🔥 Max streak</span>
-        <span className={styles.Stats_number}>{props.stats.streakMax}</span>
+        <span className={styles.Stats_number}>{gameStats.streakMax}</span>
       </li>
     </ul>
   );
