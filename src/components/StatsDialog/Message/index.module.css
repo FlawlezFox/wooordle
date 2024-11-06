@@ -34,3 +34,8 @@
 .Message_span {
   font-weight: var(--fw-medium);
 }
+
+.Message_buttons {
+  display: flex;
+  gap: 8px;
+}

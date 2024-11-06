@@ -34,6 +34,10 @@ const Key = (props: Props) => {
     setSubmittedChar(guessedChar);
   }, [guesses]);
 
+  useEffect(() => {
+    setSubmittedChar(undefined);
+  }, [game])
+
   const keyClassName = classNames(
     styles.Key_button,
     props.isBig && styles.big,

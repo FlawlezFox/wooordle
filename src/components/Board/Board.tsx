@@ -12,8 +12,8 @@ const Board = () => {
   const { showStatsDialog } = useContext(StatsDialogContext);
 
   const [chars, setChars] = useAtom(charsAtom);
-  const [guesses, setGuesses] = useAtom(guessesAtom);
-  const [game, setGame] = useAtom(gameAtom);
+  const [, setGuesses] = useAtom(guessesAtom);
+  const [game] = useAtom(gameAtom);
   const keyIndexRef = useRef(0);
 
   const alertRef = useRef<HTMLDialogElement>(null);

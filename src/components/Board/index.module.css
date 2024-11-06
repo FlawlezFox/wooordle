@@ -20,7 +20,33 @@
   color: var(--red);
   font-size: var(--fz-default);
 
+  transition: display var(--transition) allow-discrete,
+    overlay var(--transition) allow-discrete;
+  animation: close var(--transition) ease-in forwards;
+
   &:focus {
     outline: none;
+  }
+
+  &[open] {
+    animation: open var(--transition) ease-in forwards;
+  }
+}
+
+@keyframes open {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes close {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
