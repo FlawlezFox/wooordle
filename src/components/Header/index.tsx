@@ -29,7 +29,7 @@ export const Header = () => {
     <header className={styles.header}>
       <IconButton onClick={switchTheme}>
         {theme === "light" ? (
-          <SunIcon />
+          <SunIcon className={styles.Header_icon} />
         ) : (
           <MoonIcon className={styles.Header_icon} />
         )}
