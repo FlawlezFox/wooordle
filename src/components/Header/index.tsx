@@ -8,11 +8,11 @@ import ChartIcon from "src/assets/chart.svg?react";
 import SettingsIcon from "src/assets/settings.svg?react";
 import GithubIcon from "src/assets/github.svg?react";
 import { ThemeContext } from "../Root/ThemeContext";
-import Text from "../Text";
 import { StatsDialogContext } from "../StatsDialog";
 import { RulesDialogContext } from "../RulesDialog/Context";
+import { Text } from "../Text";
 
-const Header = () => {
+export const Header = () => {
   const { theme, switchTheme } = useContext(ThemeContext);
   const { showStatsDialog } = useContext(StatsDialogContext);
   const { showRulesDialog } = useContext(RulesDialogContext);
@@ -59,5 +59,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;

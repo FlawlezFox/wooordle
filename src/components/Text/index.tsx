@@ -13,7 +13,7 @@ type Props = {
   className?: string;
 };
 
-const Text = (props: Props) => {
+export const Text = memo((props: Props) => {
   const textClassName = classNames(
     styles.text,
     styles[props.variant],
@@ -28,6 +28,4 @@ const Text = (props: Props) => {
       {props.children}
     </p>
   );
-};
-
-export default memo(Text);
+});

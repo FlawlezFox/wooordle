@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import styles from "./index.module.css";
 import classNames from "classnames";
-import Text from "../Text";
+import { Text } from "../Text";
 import IconButton from "../IconButton";
 import CloseIcon from "src/assets/close.svg?react";
 

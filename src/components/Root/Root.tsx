@@ -1,13 +1,13 @@
 import { memo } from "react";
-import Header from "../Header";
 import styles from "./index.module.css";
-import Board from "../Board";
-import Keyboard from "../Keyboard";
 import {
   RulesDialog,
   RulesDialogProvider,
   StatsDialog,
   GameProvider,
+  Header,
+  Board,
+  Keyboard,
 } from "src/components";
 
 const Root = () => {

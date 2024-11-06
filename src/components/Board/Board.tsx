@@ -7,7 +7,7 @@ import { useAtom } from "jotai";
 import { Guess } from "src/models";
 import { StatsDialogContext } from "../StatsDialog";
 
-const Board = () => {
+export const Board = () => {
   const { charsAtom, guessesAtom, gameAtom } = useContext(GameContext);
   const { showStatsDialog } = useContext(StatsDialogContext);
 
@@ -84,5 +84,3 @@ const Board = () => {
     </>
   );
 };
-
-export default Board;

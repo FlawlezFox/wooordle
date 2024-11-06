@@ -1,7 +1,7 @@
 import { memo } from "react";
 import styles from "./index.module.css";
 import classNames from "classnames";
-import Text from "src/components/Text";
+import { Text } from "src/components/Text";
 
 type Props = {
   char?: string;

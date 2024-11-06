@@ -1,2 +1,2 @@
 export * from "./Tile";
-export { default } from "./Board";
+export * from "./Board";

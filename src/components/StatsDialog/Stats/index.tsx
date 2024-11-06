@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { StatsDialogContext } from "../Context";
 import styles from "./index.module.css";
 import { useAtomValue } from "jotai";
+import { Text } from "src/components";
 
 const Stats = () => {
   const { gameStatsAtom } = useContext(StatsDialogContext);
@@ -10,30 +11,38 @@ const Stats = () => {
   return (
     <ul className={styles.Stats}>
       <li className={styles.Stats_li}>
-        <span className={styles.Stats_title}>🎮 Games played</span>
-        <span className={styles.Stats_number}>{gameStats.gamesPlayed}</span>
+        <Text variant="medium">🎮 Games played</Text>
+        <Text variant="medium" fontWeight="600">
+          {gameStats.gamesPlayed}
+        </Text>
       </li>
 
       <li className={styles.Stats_li}>
-        <span className={styles.Stats_title}>🏆 Games won</span>
-        <span className={styles.Stats_number}>{gameStats.gamesWon}</span>
+        <Text variant="medium">🏆 Games won</Text>
+        <Text variant="medium" fontWeight="600">
+          {gameStats.gamesWon}
+        </Text>
       </li>
 
       <li className={styles.Stats_li}>
-        <span className={styles.Stats_title}>📈 Win %</span>
-        <span className={styles.Stats_number}>
-          {isNaN(gameStats.winPercent) ? 0 : gameStats.winPercent}
-        </span>
+        <Text variant="medium">📈 Win %</Text>
+        <Text variant="medium" fontWeight="600">
+          {isNaN(gameStats.winPercent) ? 0 : gameStats.winPercent}%
+        </Text>
       </li>
 
       <li className={styles.Stats_li}>
-        <span className={styles.Stats_title}>🚀 Current streak</span>
-        <span className={styles.Stats_number}>{gameStats.streakCurrent}</span>
+        <Text variant="medium">🚀 Current streak</Text>
+        <Text variant="medium" fontWeight="600">
+          {gameStats.streakCurrent}
+        </Text>
       </li>
 
       <li className={styles.Stats_li}>
-        <span className={styles.Stats_title}>🔥 Max streak</span>
-        <span className={styles.Stats_number}>{gameStats.streakMax}</span>
+        <Text variant="medium">🔥 Max streak</Text>
+        <Text variant="medium" fontWeight="600">
+          {gameStats.streakMax}
+        </Text>
       </li>
     </ul>
   );

@@ -3,7 +3,7 @@ import styles from "./index.module.css";
 import Key from "./Key";
 import rows from "./keys.json";
 
-const Keyboard = () => {
+export const Keyboard = () => {
   const handleClickKey = useCallback((event) => {
     if (!event.target.matches("BUTTON")) return;
 
@@ -30,5 +30,3 @@ const Keyboard = () => {
     </div>
   );
 };
-
-export default Keyboard;

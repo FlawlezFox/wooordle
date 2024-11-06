@@ -39,3 +39,13 @@
   display: flex;
   gap: 8px;
 }
+
+.Message_icon path {
+  stroke: var(--text-color);
+  fill: var(--text-color);
+}
+
+.Message_doneIcon path {
+  stroke: var(--green);
+  fill: var(--green);
+}

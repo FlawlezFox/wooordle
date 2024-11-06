@@ -1,10 +1,10 @@
-import { memo, useCallback, useContext } from "react";
+import { memo, useCallback, useContext, useState } from "react";
 import styles from "./index.module.css";
-import Text from "src/components/Text";
 import IconButton from "src/components/IconButton";
 import CopyIcon from "src/assets/copy.svg?react";
 import RestartIcon from "src/assets/restart.svg?react";
-import { GameContext } from "src/components/Root";
+import DoneIcon from "src/assets/done.svg?react";
+import { GameContext, Text } from "src/components";
 import { useAtom, useSetAtom } from "jotai";
 import { Game } from "src/models";
 import { StatsDialogContext } from "../Context";
@@ -20,6 +20,8 @@ const Message = memo((props: Props) => {
   const [game, setGame] = useAtom(gameAtom);
   const setGuesses = useSetAtom(guessesAtom);
   const setGameResult = useSetAtom(gameResultAtom);
+
+  const [isCopied, setIsCopied] = useState(false);
 
   const handleRestart = useCallback(() => {
     if (game) {
@@ -65,8 +67,13 @@ const Message = memo((props: Props) => {
       });
 
       navigator.clipboard.writeText(gameResult);
+
+      if (!isCopied) {
+        setIsCopied((prev) => !prev);
+        setTimeout(() => setIsCopied((prev) => !prev), 5000);
+      }
     }
-  }, [game]);
+  }, [game, isCopied]);
 
   return (
     <div className={styles.Message_container}>
@@ -94,11 +101,15 @@ const Message = memo((props: Props) => {
 
       <div className={styles.Message_buttons}>
         <IconButton onClick={handleCopy}>
-          <CopyIcon />
+          {isCopied ? (
+            <DoneIcon className={styles.Message_doneIcon} />
+          ) : (
+            <CopyIcon className={styles.Message_icon} />
+          )}
         </IconButton>
 
         <IconButton onClick={handleRestart}>
-          <RestartIcon />
+          <RestartIcon className={styles.Message_icon} />
         </IconButton>
       </div>
     </div>
