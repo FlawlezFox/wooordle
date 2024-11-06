@@ -2,15 +2,22 @@ import { memo } from "react";
 import Header from "../Header";
 import styles from "./index.module.css";
 import Board from "../Board";
-import { GameProvider } from "./GameContext";
 import Keyboard from "../Keyboard";
-import { StatsDialog } from "../StatsDialog";
+import {
+  RulesDialog,
+  RulesDialogProvider,
+  StatsDialog,
+  GameProvider,
+} from "src/components";
 
 const Root = () => {
   return (
     <div className={styles.container}>
       <GameProvider>
-        <Header />
+        <RulesDialogProvider>
+          <Header />
+          <RulesDialog />
+        </RulesDialogProvider>
         <Board />
         <Keyboard />
         <StatsDialog />

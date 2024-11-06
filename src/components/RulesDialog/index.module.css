@@ -1,0 +1,56 @@
+.RulesDialog_letters {
+  margin-top: 16px;
+}
+
+.RulesDialog_ul,
+.RulesDialog_letters {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.RulesDialog_ul li {
+  align-items: baseline;
+
+  &::before {
+    content: " ";
+    min-width: 16px;
+    height: 16px;
+    background-color: var(--light-gray);
+    border-radius: 4px;
+  }
+}
+
+.RulesDialog_letters li {
+  align-items: center;
+
+  &::before {
+    content: "W";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 72px;
+    height: 72px;
+    color: var(--white);
+    font-size: var(--fz-h1);
+    font-weight: var(--fw-h1);
+    background-color: var(--gray);
+    border-radius: 8px;
+  }
+
+  &:nth-child(2)::before {
+    background-color: var(--yellow);
+  }
+
+  &:nth-child(3)::before {
+    background-color: var(--green);
+  }
+}
+
+.RulesDialog_letters li,
+.RulesDialog_ul li {
+  font-size: var(--fz-medium);
+  display: flex;
+  gap: 8px;
+}

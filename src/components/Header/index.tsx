@@ -10,14 +10,20 @@ import GithubIcon from "src/assets/github.svg?react";
 import { ThemeContext } from "../Root/ThemeContext";
 import Text from "../Text";
 import { StatsDialogContext } from "../StatsDialog";
+import { RulesDialogContext } from "../RulesDialog/Context";
 
 const Header = () => {
   const { theme, switchTheme } = useContext(ThemeContext);
   const { showStatsDialog } = useContext(StatsDialogContext);
+  const { showRulesDialog } = useContext(RulesDialogContext);
 
   const handleShowStatsDialog = useCallback(() => {
-    showStatsDialog();
+    showStatsDialog({});
   }, [showStatsDialog]);
+
+  const handleShowRulesDialog = useCallback(() => {
+    showRulesDialog();
+  }, [showRulesDialog]);
 
   return (
     <header className={styles.header}>
@@ -34,7 +40,7 @@ const Header = () => {
       </Text>
 
       <nav className={styles.Header_nav}>
-        <IconButton>
+        <IconButton onClick={handleShowRulesDialog}>
           <QuestionMarkIcon className={styles.Header_icon} />
         </IconButton>
 
