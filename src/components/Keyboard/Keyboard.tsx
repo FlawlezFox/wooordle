@@ -4,7 +4,8 @@ import Key from "./Key";
 import rows from "./keys.json";
 
 export const Keyboard = () => {
-  const handleClickKey = useCallback((event) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleClickKey = useCallback((event: any) => {
     if (!event.target.matches("BUTTON")) return;
 
     const key: string = event.target.innerHTML.includes("delete")
