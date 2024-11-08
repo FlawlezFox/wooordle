@@ -56,6 +56,11 @@ export class Game {
                 char: guess[i],
                 isInRightIndex: true,
                 isInWord: true,
+                isMany:
+                  this.solution.word
+                    .split("")
+                    .filter((c) => guess[i].startsWith(c)).length > 1,
+                isFirstOccurrence: guess.indexOf(guess[i]) === i,
               });
 
               continue;
@@ -65,6 +70,11 @@ export class Game {
               char: guess[i],
               isInRightIndex: false,
               isInWord: true,
+              isMany:
+                this.solution.word
+                  .split("")
+                  .filter((c) => guess[i].startsWith(c)).length > 1,
+              isFirstOccurrence: guess.indexOf(guess[i]) === i,
             });
 
             continue;

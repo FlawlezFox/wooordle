@@ -46,6 +46,16 @@ const Row = (props: Props) => {
               ? chars[i]?.isInWord
               : submittedWord && submittedWord[i]?.isInWord
           }
+          isMany={
+            props.isCurrent
+              ? chars[i]?.isMany
+              : submittedWord && submittedWord[i]?.isMany
+          }
+          isFirstOccurrence={
+            props.isCurrent
+              ? chars[i]?.isFirstOccurrence
+              : submittedWord && submittedWord[i]?.isFirstOccurrence
+          }
           isSubmitted={!!(submittedWord && submittedWord[i]?.char)}
         />
       ))}

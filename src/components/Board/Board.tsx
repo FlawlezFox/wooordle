@@ -1,4 +1,4 @@
-import { useCallback, useContext, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef } from "react";
 import styles from "./index.module.css";
 import Row from "./Row";
 import { useWindowEventListener } from "src/hooks";
@@ -12,7 +12,7 @@ export const Board = () => {
   const { showStatsDialog } = useContext(StatsDialogContext);
 
   const [chars, setChars] = useAtom(charsAtom);
-  const [, setGuesses] = useAtom(guessesAtom);
+  const [guesses, setGuesses] = useAtom(guessesAtom);
   const [game] = useAtom(gameAtom);
   const keyIndexRef = useRef(0);
 
@@ -67,6 +67,14 @@ export const Board = () => {
   );
 
   useWindowEventListener("keydown", handleKeyDown);
+
+  useEffect(() => {
+    console.log(game.solution?.word);
+  }, [game.solution?.word])
+
+  useEffect(() => {
+    console.log(guesses);
+  }, [guesses])
 
   return (
     <>
