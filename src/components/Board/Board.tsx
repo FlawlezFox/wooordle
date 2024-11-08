@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useRef } from "react";
+import { useCallback, useContext, useRef } from "react";
 import styles from "./index.module.css";
 import Row from "./Row";
 import { useWindowEventListener } from "src/hooks";

@@ -1,0 +1,11 @@
+.Link {
+  color: var(--blue);
+  font-size: var(--fz-default);
+  font-weight: var(--fw-medium);
+  text-decoration: underline;
+  text-decoration-color: rgb(from var(--blue) r g b / 50%);
+
+  &:hover {
+    text-decoration-color: var(--blue);
+  }
+}

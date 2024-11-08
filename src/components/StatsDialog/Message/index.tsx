@@ -4,7 +4,7 @@ import IconButton from "src/components/IconButton";
 import CopyIcon from "src/assets/copy.svg?react";
 import RestartIcon from "src/assets/restart.svg?react";
 import DoneIcon from "src/assets/done.svg?react";
-import { GameContext, Text } from "src/components";
+import { GameContext, Link, Text } from "src/components";
 import { useAtom, useSetAtom } from "jotai";
 import { Game } from "src/models";
 import { StatsDialogContext } from "../Context";
@@ -93,9 +93,9 @@ const Message = memo((props: Props) => {
       {!!props.solution && (
         <Text variant="default">
           The word was{" "}
-          <span className={styles.Message_span}>
+          <Link href={`https://dictionary.cambridge.org/dictionary/english/${props.solution}`} target="_blank">
             {props.solution.toUpperCase()}
-          </span>
+          </Link>
         </Text>
       )}
 

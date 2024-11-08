@@ -1,6 +1,7 @@
 export * from "./Header";
 export * from "./Board";
 export * from "./Keyboard";
+export * from "./Link";
 export * from "./Root";
 export { default } from "./Root";
 export * from "./StatsDialog";
