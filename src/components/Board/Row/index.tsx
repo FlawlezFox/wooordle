@@ -18,10 +18,7 @@ const Row = (props: Props) => {
   const [submittedWord, setSubmittedWord] = useState<Char[]>();
 
   useEffect(() => {
-    if (game.attempts === undefined) return;
-
-    const guessedChars = guesses.filter((g) => !g.isNotInWordList)[props.index]
-      ?.chars;
+    const guessedChars = guesses[props.index]?.chars;
 
     setSubmittedWord([...(guessedChars ?? [])]);
   }, [guesses]);

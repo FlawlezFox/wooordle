@@ -9,7 +9,6 @@ export type Char = {
 export type Guess = {
   word: string;
   isCorrect: boolean;
-  isNotInWordList?: boolean;
   chars?: Char[];
   message?: string;
 };
