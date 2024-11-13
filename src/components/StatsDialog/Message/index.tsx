@@ -37,23 +37,40 @@ const Message = memo((props: Props) => {
 
     if (game && game.guesses) {
       let gameResult: string = "";
-      const guessesInWordList = game.guesses.filter((g) => !g.isNotInWordList);
 
-      if (guessesInWordList.findIndex((guess) => guess.isCorrect) !== -1) {
-        gameResult += `Wooordle guessed in ${guessesInWordList.length}/6\n`;
+      if (game.guesses.findIndex((guess) => guess.isCorrect) !== -1) {
+        gameResult += `Wooordle guessed in ${game.guesses.length}/6\n`;
       } else {
         gameResult += `Wooordle guessed in X/6\n`;
       }
 
-      guessesInWordList.forEach((guess, i) => {
+      game.guesses.forEach((guess, i) => {
         if (guess.isCorrect) {
           gameResult += "🟩🟩🟩🟩🟩";
           return;
         }
 
+        const isSameLetterInRightIndex = !!guess
+          .chars!.filter((c) => c.isManyInGuess)
+          .filter((sl) => sl.isInRightIndex).length;
+
         guess.chars?.forEach((char) => {
           if (char.isInRightIndex) {
             gameResult += "🟩";
+          } else if (
+            char.isFirstOccurrence === false &&
+            char.isMany === false &&
+            char.isManyInGuess &&
+            !char.isInRightIndex
+          ) {
+            gameResult += "⬛";
+          } else if (
+            isSameLetterInRightIndex &&
+            char.isMany === false &&
+            char.isManyInGuess &&
+            !char.isInRightIndex
+          ) {
+            gameResult += "⬛";
           } else if (char.isInWord && !char.isInRightIndex) {
             gameResult += "🟨";
           } else {
@@ -61,7 +78,7 @@ const Message = memo((props: Props) => {
           }
         });
 
-        if (i < guessesInWordList.length) {
+        if (i < game.guesses!.length) {
           gameResult += "\n";
         }
       });
@@ -93,7 +110,10 @@ const Message = memo((props: Props) => {
       {!!props.solution && (
         <Text variant="default">
           The word was{" "}
-          <Link href={`https://dictionary.cambridge.org/dictionary/english/${props.solution}`} target="_blank">
+          <Link
+            href={`https://dictionary.cambridge.org/dictionary/english/${props.solution}`}
+            target="_blank"
+          >
             {props.solution.toUpperCase()}
           </Link>
         </Text>

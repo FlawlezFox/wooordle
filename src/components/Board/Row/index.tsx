@@ -18,10 +18,7 @@ const Row = (props: Props) => {
   const [submittedWord, setSubmittedWord] = useState<Char[]>();
 
   useEffect(() => {
-    if (game.attempts === undefined) return;
-
-    const guessedChars = guesses.filter((g) => !g.isNotInWordList)[props.index]
-      ?.chars;
+    const guessedChars = guesses[props.index]?.chars;
 
     setSubmittedWord([...(guessedChars ?? [])]);
   }, [guesses]);
@@ -31,6 +28,7 @@ const Row = (props: Props) => {
       {[...Array(game.solution?.length)].map((_v, i) => (
         <Tile
           key={i}
+          index={props.index}
           char={
             props.isCurrent
               ? chars[i]?.char
@@ -45,6 +43,21 @@ const Row = (props: Props) => {
             props.isCurrent
               ? chars[i]?.isInWord
               : submittedWord && submittedWord[i]?.isInWord
+          }
+          isMany={
+            props.isCurrent
+              ? chars[i]?.isMany
+              : submittedWord && submittedWord[i]?.isMany
+          }
+          isManyInGuess={
+            props.isCurrent
+              ? chars[i]?.isManyInGuess
+              : submittedWord && submittedWord[i]?.isManyInGuess
+          }
+          isFirstOccurrence={
+            props.isCurrent
+              ? chars[i]?.isFirstOccurrence
+              : submittedWord && submittedWord[i]?.isFirstOccurrence
           }
           isSubmitted={!!(submittedWord && submittedWord[i]?.char)}
         />

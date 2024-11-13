@@ -4,7 +4,6 @@ import Row from "./Row";
 import { useWindowEventListener } from "src/hooks";
 import { GameContext } from "../Root";
 import { useAtom } from "jotai";
-import { Guess } from "src/models";
 import { StatsDialogContext } from "../StatsDialog";
 
 export const Board = () => {
@@ -40,11 +39,7 @@ export const Board = () => {
       } else if (key.includes("Enter") && keyIndexRef.current === 5) {
         const word = chars.map((c) => c.char).join("");
 
-        const isRightGuess = game.isRightGuess(word);
-        setGuesses([...(game.guesses ?? [])]);
-        const lastGuess: Guess | undefined = game.guesses?.at(-1);
-
-        if (!isRightGuess && lastGuess && lastGuess.isNotInWordList) {
+        if (!game.solution!.isInDictionary(word)) {
           if (alertRef.current && !alertRef.current.open) {
             alertRef.current.show();
             setTimeout(() => alertRef.current!.close(), 2000);
@@ -53,7 +48,10 @@ export const Board = () => {
           return;
         }
 
-        if (lastGuess && lastGuess.isCorrect) {
+        const isRightGuess = game.isRightGuess(word);
+        setGuesses([...(game.guesses ?? [])]);
+
+        if (isRightGuess) {
           showStatsDialog({ gameResult: "win" });
         } else if (game.isGameEnded) {
           showStatsDialog({ gameResult: "lose" });
@@ -76,7 +74,11 @@ export const Board = () => {
 
       <div className={styles.board}>
         {[...Array(game.maxAttempts)].map((_v, i) => (
-          <Row key={i} isCurrent={i === game.attempts} index={i} />
+          <Row
+            key={i}
+            isCurrent={i === (game.guesses?.length ?? 0)}
+            index={i}
+          />
         ))}
       </div>
     </>

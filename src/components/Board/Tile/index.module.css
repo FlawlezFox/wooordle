@@ -6,22 +6,22 @@
   justify-content: center;
   border: 1px solid var(--light-gray);
   border-radius: var(--border-radius);
-}
 
-.letterInRightIndex p,
-.letterInWord p,
-.letterNotInWord p {
-  color: var(--white);
-}
+  &.letterInRightIndex p,
+  &.letterInWord p,
+  &.letterNotInWord p {
+    color: var(--white);
+  }
 
-.letterInRightIndex {
-  background-color: var(--green);
-}
+  &.letterInRightIndex {
+    background-color: var(--green);
+  }
 
-.letterNotInWord {
-  background-color: var(--gray);
-}
+  &.letterInWord {
+    background-color: var(--yellow);
+  }
 
-.letterInWord {
-  background-color: var(--yellow);
+  &.letterNotInWord {
+    background-color: var(--gray);
+  }
 }

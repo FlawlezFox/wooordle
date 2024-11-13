@@ -18,40 +18,55 @@ const Key = (props: Props) => {
   const [submittedChar, setSubmittedChar] = useState<Char>();
 
   useEffect(() => {
-    if (game.attempts === undefined || props.children.length > 1) return;
+    if (props.children.length > 1) return;
 
-    const guessedChar = guesses
-      .filter((g) => !g.isNotInWordList)
+    const guessedChars = guesses
       .at(-1)
-      ?.chars?.find((char) => props.children.includes(char.char));
+      ?.chars?.filter((char) => props.children.includes(char.char));
+
+    const guessedChar =
+      guessedChars &&
+      (guessedChars.length > 1 && guessedChars.filter(char => char.isInRightIndex)
+        ? guessedChars.find(char => char.isInRightIndex)
+        : guessedChars[0]);
 
     if (submittedChar && !submittedChar.isInWord) return;
 
     if (submittedChar && submittedChar.isInRightIndex) return;
 
-    if (submittedChar && !submittedChar.isInRightIndex && !guessedChar?.isInRightIndex && submittedChar.isInWord ) return;
+    if (
+      submittedChar &&
+      !submittedChar.isInRightIndex &&
+      !guessedChar?.isInRightIndex &&
+      submittedChar.isInWord
+    )
+      return;
 
     setSubmittedChar(guessedChar);
   }, [guesses]);
 
   useEffect(() => {
     setSubmittedChar(undefined);
-  }, [game])
+  }, [game]);
 
   const keyClassName = classNames(
     styles.Key_button,
+
     props.isBig && styles.big,
+
     submittedChar && submittedChar.isInRightIndex && styles.letterInRightIndex,
+
     submittedChar &&
       !submittedChar.isInRightIndex &&
       submittedChar.isInWord &&
       styles.letterInWord,
+
     submittedChar &&
       !submittedChar.isInRightIndex &&
       !submittedChar.isInWord &&
       styles.letterNotInWord
   );
-  
+
   return <button className={keyClassName}>{props.children}</button>;
 };
 
