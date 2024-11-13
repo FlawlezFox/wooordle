@@ -30,8 +30,6 @@ const Key = (props: Props) => {
         ? guessedChars.find(char => char.isInRightIndex)
         : guessedChars[0]);
 
-    console.log(guessedChar);
-
     if (submittedChar && !submittedChar.isInWord) return;
 
     if (submittedChar && submittedChar.isInRightIndex) return;
