@@ -50,9 +50,27 @@ const Message = memo((props: Props) => {
           return;
         }
 
+        const isSameLetterInRightIndex = !!guess
+          .chars!.filter((c) => c.isManyInGuess)
+          .filter((sl) => sl.isInRightIndex).length;
+
         guess.chars?.forEach((char) => {
           if (char.isInRightIndex) {
             gameResult += "🟩";
+          } else if (
+            char.isFirstOccurrence === false &&
+            char.isMany === false &&
+            char.isManyInGuess &&
+            !char.isInRightIndex
+          ) {
+            gameResult += "⬛";
+          } else if (
+            isSameLetterInRightIndex &&
+            char.isMany === false &&
+            char.isManyInGuess &&
+            !char.isInRightIndex
+          ) {
+            gameResult += "⬛";
           } else if (char.isInWord && !char.isInRightIndex) {
             gameResult += "🟨";
           } else {

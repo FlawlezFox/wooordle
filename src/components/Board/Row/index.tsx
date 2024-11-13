@@ -28,6 +28,7 @@ const Row = (props: Props) => {
       {[...Array(game.solution?.length)].map((_v, i) => (
         <Tile
           key={i}
+          index={props.index}
           char={
             props.isCurrent
               ? chars[i]?.char
@@ -47,6 +48,11 @@ const Row = (props: Props) => {
             props.isCurrent
               ? chars[i]?.isMany
               : submittedWord && submittedWord[i]?.isMany
+          }
+          isManyInGuess={
+            props.isCurrent
+              ? chars[i]?.isManyInGuess
+              : submittedWord && submittedWord[i]?.isManyInGuess
           }
           isFirstOccurrence={
             props.isCurrent

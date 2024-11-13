@@ -20,9 +20,17 @@ const Key = (props: Props) => {
   useEffect(() => {
     if (props.children.length > 1) return;
 
-    const guessedChar = guesses
+    const guessedChars = guesses
       .at(-1)
-      ?.chars?.find((char) => props.children.includes(char.char));
+      ?.chars?.filter((char) => props.children.includes(char.char));
+
+    const guessedChar =
+      guessedChars &&
+      (guessedChars.length > 1 && guessedChars.filter(char => char.isInRightIndex)
+        ? guessedChars.find(char => char.isInRightIndex)
+        : guessedChars[0]);
+
+    console.log(guessedChar);
 
     if (submittedChar && !submittedChar.isInWord) return;
 
@@ -45,12 +53,16 @@ const Key = (props: Props) => {
 
   const keyClassName = classNames(
     styles.Key_button,
+
     props.isBig && styles.big,
+
     submittedChar && submittedChar.isInRightIndex && styles.letterInRightIndex,
+
     submittedChar &&
       !submittedChar.isInRightIndex &&
       submittedChar.isInWord &&
       styles.letterInWord,
+
     submittedChar &&
       !submittedChar.isInRightIndex &&
       !submittedChar.isInWord &&

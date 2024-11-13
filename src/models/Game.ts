@@ -48,6 +48,9 @@ export class Game {
                 this.solution.word
                   .split("")
                   .filter((c) => guess[i].startsWith(c)).length > 1,
+              isManyInGuess:
+                guess.split("").filter((c) => guess[i].startsWith(c)).length >
+                1,
               isFirstOccurrence: guess.indexOf(guess[i]) === i,
             });
 
@@ -61,6 +64,8 @@ export class Game {
             isMany:
               this.solution.word.split("").filter((c) => guess[i].startsWith(c))
                 .length > 1,
+            isManyInGuess:
+              guess.split("").filter((c) => guess[i].startsWith(c)).length > 1,
             isFirstOccurrence: guess.indexOf(guess[i]) === i,
           });
 

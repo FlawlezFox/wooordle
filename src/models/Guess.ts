@@ -3,6 +3,7 @@ export type Char = {
   isInWord: boolean;
   isInRightIndex: boolean;
   isMany?: boolean;
+  isManyInGuess?: boolean;
   isFirstOccurrence?: boolean;
 };
 
